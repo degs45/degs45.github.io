@@ -1,1 +1,11 @@
-# ders45.github.io
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>My GitHub Page</title>
+</head>
+<body>
+    <h1>GitHub Pages 작동 성공!</h1>
+    <p>이곳에 JCL 입력 폼 및 전송 JS 코드를 작성하면 됩니다.</p>
+</body>
+</html>
