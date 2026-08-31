@@ -1,16 +1,246 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My GitHub Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS/360 MVT RELEASE 21.8F - JOB SUBMISSION LOG</title>
+    <style>
+        /* 레트로 컴퓨터 고정폭 폰트 설정 및 배경 스타일링 */
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+        body {
+            background-color: #1a1a1a;
+            color: #111;
+            font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 1970년대 Green Bar Paper (초록색 줄무늬 종이) 효과 */
+        .printout {
+            width: 100%;
+            max-width: 900px;
+            background: repeating-linear-gradient(
+                #e8f5e9,
+                #e8f5e9 24px,
+                #ffffff 24px,
+                #ffffff 48px
+            );
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            padding: 30px 40px;
+            box-sizing: border-box;
+            border-left: 15px dashed #444; /* 양옆 구멍 뚫린 라인 프린터 종이 가장자리 */
+            border-right: 15px dashed #444;
+            line-height: 24px;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        /* 메인프레임 로그 헤더 */
+        .banner {
+            font-weight: bold;
+            white-space: pre;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #333;
+            padding-bottom: 10px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 15px;
+            display: block;
+        }
+
+        /* JCL 입력 폼 스타일 */
+        .form-group {
+            margin: 15px 0;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #666;
+            padding: 5px;
+            box-sizing: border-box;
+            text-transform: uppercase; /* 메인프레임 대문자 고정 */
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            background-color: #fff;
+            border-color: #000;
+        }
+
+        .btn-submit {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #555;
+        }
+
+        /* 시스템 상태 로그 출력창 */
+        #log-output {
+            margin-top: 15px;
+            white-space: pre-wrap;
+            font-size: 13px;
+            color: #000;
+        }
+
+        /* 워터마크 안내 */
+        .footer-stamp {
+            margin-top: 30px;
+            border-top: 1px solid #aaa;
+            padding-top: 10px;
+            font-size: 11px;
+            color: #555;
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
-    <h1>GitHub Pages 작동 성공!</h1>
-    <p>이곳에 JCL 입력 폼 및 전송 JS 코드를 작성하면 됩니다.</p>
-    <p>이곳에 JCL 입력 폼 및 전송 JS 코드를 작성하면 됩니다.</p>
-    <p>이곳에 JCL 입력 폼 및 전송 JS 코드를 작성하면 됩니다.</p>
-    <p>이곳에 JCL 입력 폼 및 전송 JS 코드를 작성하면 됩니다.</p>
-    <p>이곳에 JCL 입력 폼 및 전송 JS 코드를 작성하면 됩니다.</p>
-    
+
+<div class="printout">
+    <!-- 메인프레임 SYSOUT 헤더 아트 -->
+    <div class="banner">
+HH      HH  EEEEEEEE  RRRRRRRR    CCCCCC  UU    UU  LL        EEEEEEEE   ssss 
+HH      HH  EE        RR     RR  CC    CC UU    UU  LL        EE        ss    
+HHHHHHHHHH  EEEEEE    RRRRRRRR   CC       UU    UU  LL        EEEEEE     ssss 
+HH      HH  EE        RR   RR    CC    CC UU    UU  LL        EE            ss
+HH      HH  EEEEEEEE  RR    RR    CCCCCC   UUUUUU   LLLLLLLL  EEEEEEEE  ssss  
+
+*******************************************************************************
+*  IBM SYSTEM/360 OPERATING SYSTEM : MVT RELEASE 21.8F                         *
+*  HERCULES EMULATOR REMOTE JOB ENTRY (RJE) GATEWAY                           *
+*  SYSTEM DATE: <span id="sys-date"></span>                                                   *
+*******************************************************************************
+    </div>
+
+    <span class="section-title">//JOB.SUBMIT DD * (REMOTE INPUT DATA)</span>
+    <p>ENTER PARAMETER DATA TO BE PACKED INTO JCL CARD DECK:</p>
+
+    <!-- 사용자 입력 폼 -->
+    <div class="form-group">
+        <label for="gh-token">1. GITHUB PERSONAL ACCESS TOKEN (PAT):</label>
+        <input type="text" id="gh-token" placeholder="github_pat_11AAAAA..." style="text-transform: none;">
+    </div>
+
+    <div class="form-group">
+        <label for="card-data">2. INPUT DATA FOR SYSUT1 DD CARD (MAX 80 CHARS):</label>
+        <input type="text" id="card-data" maxlength="80" placeholder="HELLO OS/360 MVT WORLD! FROM INTERNET">
+    </div>
+
+    <button class="btn-submit" onclick="submitJcl()">[ EXECUTE JOB SUBMIT ]</button>
+
+    <br><br>
+    <span class="section-title">//SYSPRINT DD STATEMENTS (SYSTEM LOG)</span>
+    <div id="log-output">READY FOR INPUT. AWAITING JOB COMMAND...</div>
+
+    <div class="footer-stamp">
+        PAGE 0001 - OS/360 MVT HASP II SYSTEM LOG - HERCULES EMULATOR GATEWAY
+    </div>
+</div>
+
+<script>
+    // 현재 날짜 설정 (OS/360 Julian Date 감성)
+    const now = new Date();
+    document.getElementById('sys-date').innerText = now.toISOString().slice(0,10);
+
+    async function submitJcl() {
+        const token = document.getElementById('gh-token').value.trim();
+        const inputData = document.getElementById('card-data').value.toUpperCase().trim();
+        const log = document.getElementById('log-output');
+
+        if (!token) {
+            alert('GITHUB TOKEN IS REQUIRED TO SUBMIT JOB!');
+            return;
+        }
+
+        log.innerText = ">> IEF236I ALLOC_ SUBMITTING JCL TO GITHUB REPOSITORY...\n";
+
+        // OS/360 MVT 표준 JCL 템플릿 작성
+        const jclContent = 
+`//HERCJOB  JOB (132),'OS360-TEST',CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1)
+//STEP1    EXEC PGM=IEBGENER
+//SYSPRINT DD SYSOUT=A
+//SYSIN    DD DUMMY
+//SYSUT2   DD SYSOUT=A
+//SYSUT1   DD *
+${inputData || "NO INPUT DATA PROVIDED"}
+/*
+//
+`;
+
+        // GitHub API를 사용해 저장소의 input.jcl 파일 업데이트 (Commit)
+        const repo = "degs45/degs45.github.io"; // 사용자 계정 및 저장소
+        const path = "input.jcl";
+        const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+        try {
+            // 1. 기존 파일의 SHA 조회
+            log.innerText += ">> IEF237I GET_SHA FILE FETCH IN PROGRESS...\n";
+            let sha = "";
+            const getRes = await fetch(url, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (getRes.ok) {
+                const getData = await getRes.json();
+                sha = getData.sha;
+            }
+
+            // 2. Base64 인코딩 후 파일 커밋 (덮어쓰기)
+            log.innerText += ">> IEF142I EXECUTION - STEP1 - COND CODE 0000\n";
+            log.innerText += ">> IEF285I SCHEDULER QUEUE UPDATING...\n";
+
+            const putRes = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: `JCL Submitted from Web: ${new Date().toLocaleTimeString()}`,
+                    content: btoa(unescape(encodeURIComponent(jclContent))),
+                    sha: sha
+                })
+            });
+
+            if (putRes.ok) {
+                log.innerText += "\n*** JOB HERCJOB(JOB00102) SUBMITTED SUCCESSFULLY ***\n";
+                log.innerText += ">> HASP100 HERCJOB ON CARD READER 00C\n";
+                log.innerText += ">> HASP373 HERCJOB STARTED - INIT 1 - CLASS A\n";
+                log.innerText += ">> HASP395 HERCJOB ENDED - COND CODE 0000\n";
+                log.innerText += "\n[STATUS] Windows 7 PC's git pull script will detect this within 10s.";
+            } else {
+                const errData = await putRes.json();
+                log.innerText += `\n[ERROR] IEF450I JOB FAILED. GITHUB API ERROR: ${errData.message}`;
+            }
+
+        } catch (err) {
+            log.innerText += `\n[ERROR] TRANSMISSION FAILED: ${err.message}`;
+        }
+    }
+</script>
+
 </body>
 </html>
